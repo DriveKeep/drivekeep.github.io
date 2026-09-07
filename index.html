@@ -3,80 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DriveKeep - Dein Fahrzeug-Companion</title>
+    <title>DriveKeep - Dein privater Fahrzeug-Companion</title>
     <style>
         :root {
-            --primary-color: #007AFF; /* Hellblau */
+            --primary-color: #007AFF;
             --bg-color: #ffffff;
             --text-color: #1d1d1f;
             --secondary-text: #86868b;
             --light-gray: #f5f5f7;
+            --card-bg: #ffffff;
+            --transition: all 0.3s ease;
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
+            padding: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
+
+        nav {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .lang-switcher button {
+            background: var(--light-gray);
+            border: 1px solid #ddd;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .lang-switcher button.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 4rem 2rem;
         }
+
+        .hero {
+            text-align: center;
+            padding: 8rem 0 4rem;
+        }
+
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
             letter-spacing: -1px;
         }
-        p {
-            font-size: 1.3rem;
-            line-height: 1.6;
+
+        .hero p {
+            font-size: 1.4rem;
             color: var(--secondary-text);
-            margin-bottom: 3rem;
+            max-width: 750px;
+            margin: 0 auto 3rem;
         }
+
         .btn {
             display: inline-block;
-            padding: 14px 32px;
+            padding: 18px 40px;
             background-color: var(--primary-color);
             color: white;
             border: none;
             text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            border-radius: 30px;
+            transition: var(--transition);
             font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.4);
+            background-color: #0066cc;
+        }
+
+        .play-store-badge {
+            display: inline-block;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .play-store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e1e1e1;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 6rem 0;
+        }
+
+        .feature-card {
+            background: var(--light-gray);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            text-align: left;
+        }
+
+        .feature-card:hover {
+            background: white;
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--secondary-text);
+            margin: 0;
             font-size: 1.1rem;
         }
-        .btn:hover {
-            background-color: #005ecb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+            margin-bottom: 6rem;
         }
+
+        .screenshot-gallery img {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .screenshot-gallery img:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-color);
+        }
+
+        .security-box {
+            background: #1d1d1f;
+            color: white;
+            padding: 4rem;
+            border-radius: 32px;
+            text-align: center;
+            margin: 6rem 0;
+        }
+
+        .security-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .security-box p {
+            color: #a1a1a6;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+
         footer {
-            position: fixed;
-            bottom: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--light-gray);
             font-size: 0.9rem;
-            color: #86868b;
+            color: var(--secondary-text);
         }
-        a { color: var(--primary-color); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .container { padding: 2rem 1rem; }
+            .features { grid-template-columns: 1fr; }
+            nav { padding: 1rem; }
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>DriveKeep</h1>
-        <p>Dein zuverlässiger Companion für dein Fahrzeug. Einfach, intuitiv und sicher.</p>
-        <div style="margin-bottom: 3rem;">
-            <p><small>Aktueller Status: In Entwicklung</small></p>
-        </div>
-        <a href="privacy.html" class="btn">Datenschutzrichtlinie</a>
+<body lang="de">
+
+<nav>
+    <a href="#" class="logo">DriveKeep</a>
+    <div class="lang-switcher">
+        <button id="btn-de" class="active" onclick="setLanguage('de')">DE</button>
+        <button id="btn-en" onclick="setLanguage('en')">EN</button>
     </div>
-    <footer>
-        &copy; 2024 Apparise Studio. Alle Rechte vorbehalten.
-    </footer>
+</nav>
+
+<div class="container">
+    <section class="hero">
+        <div class="status-badge" id="status-badge">Aktueller Status: In Entwicklung</div>
+        <h1 id="hero-title">DriveKeep</h1>
+        <p id="hero-desc">Dein privater Fahrzeug-Companion. Sicher, lokal und intuitiv organisiert.</p>
+
+        <div style="margin-bottom: 3rem;">
+            <a href="https://play.google.com/store/apps/details?id=com.forgeapps.drivekeep" class="play-store-badge" id="play-store-btn">
+                <img src="res/googleplay-badge-01-getit.width-1440.png" alt="Get it on Google Play" style="height: 150px; width: auto; display: block;">
+            </a>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="features">
+            <div class="feature-card">
+                <h3 id="feat-1-title">Maximale Privatsphäre</h3>
+                <p id="feat-1-desc">100% lokale Datenspeicherung. Deine Daten verlassen niemals dein Gerät – keine Cloud, keine Überwachung.</p>
+            </div>
+            <div class="feature-card">
+                <h3 id="feat-2-title">Tank- & Service-Log</h3>
+                <p id="feat-2-desc">Verfolge Kraftstoffverbrauch, Kosten und alle Wartungsarbeiten in einer übersichtlichen Historie.</p>
+            </div>
+            <div class="feature-card">
+                <h3 id="feat-3-title">Dokumententresor</h3>
+                <p id="feat-3-desc">Halte Zulassungsbescheinigungen, Versicherungen und Handbücher als digitale Dateien griffbereit.</p>
+            </div>
+            <div class="feature-card">
+                <h3 id="feat-4-title">Intelligente Alerts</h3>
+                <p id="feat-4-desc">Erhalte proaktive Benachrichtigungen für anstehende Services, damit du nie eine Wartung verpasst.</p>
+            </div>
+        </div>
+
+        <h3 id="preview-title" style="text-align: center; margin-top: 4rem; font-size: 2rem;">Vorschau</h3>
+        <div class="screenshot-gallery">
+            <img src="screenshots/Screenshot_20260907_194008.png" alt="Screenshot 1">
+            <img src="screenshots/Screenshot_20260907_194500.png" alt="Screenshot 2">
+            <img src="screenshots/Screenshot_20260907_194522.png" alt="Screenshot 3">
+            <img src="screenshots/Screenshot_20260907_194535.png" alt="Screenshot 4">
+        </div>
+    </section>
+
+    <section class="security-box">
+        <h2 id="sec-title">Sicherheit zuerst</h2>
+        <p id="sec-desc">Wir glauben, dass deine Daten dir gehören. DriveKeep arbeitet vollständig offline. Deine Informationen werden lokal auf deinem Gerät gespeichert und niemals mit Dritten geteilt.</p>
+    </section>
+
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <a href="privacy.html" class="btn" style="background: var(--secondary-text);">Datenschutzrichtlinie</a>
+    </div>
+</div>
+
+<footer style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--light-gray);">
+    <p>&copy; 2026 Julius Hackel. Alle Rechte vorbehalten | All rights reserved.</p>
+</footer>
+
+<script>
+    const translations = {
+        de: {
+            heroTitle: "DriveKeep",
+            heroDesc: "Dein privater Fahrzeug-Companion. Sicher, lokal und intuitiv organisiert.",
+            cta: "Mehr erfahren",
+            status: "Aktueller Status: In Entwicklung",
+            feat1Title: "Maximale Privatsphäre",
+            feat1Desc: "100% lokale Datenspeicherung. Deine Daten verlassen niemals dein Gerät – keine Cloud, keine Überwachung.",
+            feat2Title: "Tank- & Service-Log",
+            feat2Desc: "Verfolge Kraftstoffverbrauch, Kosten und alle Wartungsarbeiten in einer übersichtlichen Historie.",
+            feat3Title: "Dokumententresor",
+            feat3Desc: "Halte Zulassungsbescheinigungen, Versicherungen und Handbücher als digitale Dateien griffbereit.",
+            feat4Title: "Intelligente Alerts",
+            feat4Desc: "Erhalte proaktive Benachrichtigungen für anstehende Services, damit du nie eine Wartung verpasst.",
+            previewTitle: "Vorschau",
+            secTitle: "Sicherheit zuerst",
+            secDesc: "Wir glauben, dass deine Daten dir gehören. DriveKeep arbeitet vollständig offline. Deine Informationen werden lokal auf deinem Gerät gespeichert und niemals mit Dritten geteilt.",
+            privacy: "Datenschutzrichtlinie",
+            badge: "Jetzt auf Google Play"
+        },
+        en: {
+            heroTitle: "DriveKeep",
+            heroDesc: "Your private vehicle companion. Secure, local, and intuitively organized.",
+            cta: "Learn More",
+            status: "Current Status: In Development",
+            feat1Title: "Maximum Privacy",
+            feat1Desc: "100% local data storage. Your data never leaves your device – no cloud, no tracking.",
+            feat2Title: "Fuel & Service Logs",
+            feat2Desc: "Track fuel consumption, costs, and maintenance history in one clear overview.",
+            feat3Title: "Document Vault",
+            feat3Desc: "Keep registration, insurance, and manuals handy as digital files or photos.",
+            feat4Title: "Smart Alerts",
+            feat4Desc: "Get proactive notifications for upcoming services, so you never miss a maintenance task.",
+            previewTitle: "Preview",
+            secTitle: "Security First",
+            secDesc: "We believe your data belongs to you. DriveKeep operates entirely offline. Your information is stored locally on your device and is never shared with third parties.",
+            privacy: "Privacy Policy",
+            badge: "Get it on Google Play"
+        }
+    };
+
+    function setLanguage(lang) {
+        const t = translations[lang];
+        if (!t) return;
+
+        const elements = {
+            'hero-title': t.heroTitle,
+            'hero-desc': t.heroDesc,
+            'cta-btn': t.cta,
+            'status-badge': t.status,
+            'badge-text': t.badge,
+            'feat-1-title': t.feat1Title,
+            'feat-1-desc': t.feat1Desc,
+            'feat-2-title': t.feat2Title,
+            'feat-2-desc': t.feat2Desc,
+            'feat-3-title': t.feat3Title,
+            'feat-3-desc': t.feat3Desc,
+            'feat-4-title': t.feat4Title,
+            'feat-4-desc': t.feat4Desc,
+            'preview-title': t.previewTitle,
+            'sec-title': t.secTitle,
+            'sec-desc': t.secDesc
+        };
+
+        for (const [id, text] of Object.entries(elements)) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        const privacyLink = document.querySelector('a[href="privacy.html"]');
+        if (privacyLink) privacyLink.innerText = t.privacy;
+
+        const btnDe = document.getElementById('btn-de');
+        const btnEn = document.getElementById('btn-en');
+        if (btnDe) btnDe.classList.toggle('active', lang === 'de');
+        if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+
+        document.documentElement.lang = lang;
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('preferredLang') || 'de';
+        setLanguage(savedLang);
+    });
+</script>
+
 </body>
 </html>
