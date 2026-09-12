@@ -212,6 +212,24 @@
             border-top: 1px solid var(--light-gray);
             font-size: 0.9rem;
             color: var(--secondary-text);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .footer-links a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
         }
 
         @media (max-width: 768px) {
@@ -284,8 +302,12 @@
     </div>
 </div>
 
-<footer style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--light-gray);">
-    <p>&copy; 2026 Julius Hackel. Alle Rechte vorbehalten | All rights reserved.</p>
+<footer>
+    <div class="footer-links">
+        <a href="impressum.html">Impressum</a>
+        <a href="privacy.html">Datenschutzerklärung</a>
+    </div>
+    <p>&copy; 2026 Julius Hackel. Alle Rechte vorbehalten.</p>
 </footer>
 
 <script>
@@ -375,6 +397,5 @@
         setLanguage(savedLang);
     });
 </script>
-
 </body>
 </html>
