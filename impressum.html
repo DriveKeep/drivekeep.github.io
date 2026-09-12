@@ -4,71 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum - DriveKeep</title>
-    <style>
-        :root {
-            --primary-color: #007AFF;
-            --bg-color: #ffffff;
-            --text-color: #1d1d1f;
-            --secondary-text: #86868b;
-            --light-gray: #f5f5f7;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 2rem;
-            border: 1px solid var(--light-gray);
-            border-radius: 12px;
-        }
-        h1 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--light-gray);
-            padding-bottom: 10px;
-        }
-        h2 {
-            margin-top: 2rem;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1rem;
-            color: #444;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body lang="de">
-    <div class="container">
-        <a href="index.html" class="back-link">&larr; Zurück zu DriveKeep</a>
-        <h1>Impressum</h1>
-        
-        <p><strong style="font-size: 1.2rem;">Verantwortlicher Hinweis:</strong></p>
-        <p>
-            Julius Hackel<br>
-            Albert-Schweitzer-Straße 13<br>
-            97941 Tauberbischofsheim<br>
-            Deutschland
-        </p>
-
-        <p><strong style="font-size: 1.2rem;">Kontakt:</strong></p>
-        <p>
-            E-Mail: j.hackel.digital@gmail.com
-        </p>
-
-        <p><strong style="font-size: 1.2rem;">Haftungsausschluss:</strong></p>
-        <p>Die Inhalte dieser Website dienen ausschließlich der Information und stellen keine Rechtsberatung dar. Die Nutzung der Website erfolgt auf eigene Gefahr.</p>
+<body>
+<nav>
+    <a href="index.html" class="logo">DriveKeep</a>
+    <div class="lang-switcher">
+        <button class="active" onclick="location.href='impressum.html'">DE</button>
+        <button onclick="location.href='impressum_en.html'">EN</button>
     </div>
+</nav>
+
+<div class="container">
+    <div style="text-align: right; margin-bottom: 2rem;">
+        <a href="index.html" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">← Zurück zu DriveKeep</a>
+    </div>
+    
+    <h1 style="font-size: 3rem;">Impressum</h1>
+    <p><strong style="font-size: 1.5rem;">Verantwortlicher Hinweis:</strong></p>
+    <p>
+        Julius Hackel<br>
+        Albert-Schweitzer-Straße 13<br>
+        97941 Tauberbischofsheim, Deutschland
+    </p>
+
+    <p><strong style="font-size: 1.5rem;">Kontakt:</strong></p>
+    <p>
+        E-Mail: j.hackel.digital@gmail.com
+    </p>
+
+    <p><strong style="font-size: 1.5rem;">Haftungsausschluss:</strong></p>
+    <p>Die Inhalte dieser Website dienen ausschließlich der Information und stellen keine Rechtsberatung dar. Die Nutzung der Website erfolgt auf eigene Gefahr.</p>
+
+    <footer style="margin-top: 4rem; padding: 4rem 2rem; border-top: 1px solid var(--light-gray); font-size: 0.9rem; color: var(--secondary-text);">
+        <p>&copy; 2026 Julius Hackel. Alle Rechte vorbehalten.</p>
+    </footer>
+</div>
 </body>
 </html>
